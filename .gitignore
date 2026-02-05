@@ -1,0 +1,10 @@
+# Ignore everything by default
+*
+
+# But allow .cs files in Assets folder
+!Assets/
+!Assets/**/*.cs
+
+# Allow .gitignore files themselves
+!.gitignore
+
