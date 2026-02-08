@@ -7,6 +7,12 @@ public class Trap : MonoBehaviour
     protected virtual void OnTriggerEnter2D(Collider2D collision)
     {
         if(collision.GetComponent<Player>() != null)
-            Debug.Log("Knocked!");
+        {
+            Player player = collision.GetComponent<Player>();
+            player.Knockback(transform);
+
+
+        }
+
     }
 }
