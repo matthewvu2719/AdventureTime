@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TrapSawExtended : Trap
+public class TrapSawExtended : Danger
 {
     private Animator anim;
     //[SerializeField] private bool isWorking;

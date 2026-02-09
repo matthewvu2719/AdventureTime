@@ -176,7 +176,10 @@ public class Player : MonoBehaviour
 
     public void Knockback(Transform damageTransform)
     {
+
         if (!canBeKnocked) return;
+
+        GetComponent<CameraShakeFX>().ScreenShake(-facingDirection);
         isKnocked = true;
         canBeKnocked= false;
 
@@ -231,12 +234,10 @@ public class Player : MonoBehaviour
     {
         if(facingRight && rb.velocity.x < 0)
         {   
-            Debug.Log(rb.velocity.x);
             Flip();
         }
         else if(!facingRight && rb.velocity.x > 0f)
         {
-            Debug.Log(rb.velocity.x);
             Flip();
         }
     }

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TrapFire : Trap
+public class TrapFire : Danger
 {
     public bool isWorking;
     private Animator anim;

@@ -11,8 +11,7 @@ public class EnemyRino : Enemy
 
     
 
-    private RaycastHit2D playerDetection;
-
+    
     protected override void Start()
     {
         base.Start();
@@ -23,7 +22,7 @@ public class EnemyRino : Enemy
     // Update is called once per frame
     void Update()
     {
-        playerDetection = Physics2D.Raycast(wallCheck.position, Vector2.right * facingDirection, 100, ~whatToIgnore);
+        CollisionCheck();
         if (playerDetection.collider.GetComponent<Player>() != null)
         {
             aggressive= true;
@@ -34,6 +33,11 @@ public class EnemyRino : Enemy
         }
         else
         {
+            if(!groundDetected)
+            {
+                aggressive = false;
+                Flip();
+            }
             rb.velocity = new Vector2(aggroSpeed * facingDirection, rb.velocity.y);
             if(wallDetected && invincible)
             {
@@ -51,16 +55,11 @@ public class EnemyRino : Enemy
         }
 
 
-
-        CollisionCheck();
+       
         anim.SetBool("invincible", invincible);
         anim.SetFloat("xVelocity", rb.velocity.x);
 
     }
 
-    protected override void OnDrawGizmos()
-    {
-        base.OnDrawGizmos();
-        Gizmos.DrawLine(wallCheck.position, new Vector2(wallCheck.position.x + playerDetection.distance * facingDirection, wallCheck.position.y));
-    }
+
 }

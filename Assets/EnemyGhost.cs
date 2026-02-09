@@ -9,7 +9,6 @@ public class EnemyGhost : Enemy
     [SerializeField] private float activeTime;
     private float activeTimeCounter =4;
 
-    private Transform player;
     private SpriteRenderer sr;
 
     [SerializeField] private float[] xOffSet;
@@ -25,40 +24,51 @@ public class EnemyGhost : Enemy
         sr = GetComponent<SpriteRenderer>();
         aggressive= true;
         invincible= true;
-        player = GameObject.Find("Player").transform;
     }
 
 
     // Update is called once per frame
     void Update()
     {
+        if (player == null)
+        {
+            anim.SetTrigger("disappear");
+            return;
+        }
+
         activeTimeCounter -= Time.deltaTime;
         idleTimeCounter -= Time.deltaTime;
 
-        if(activeTimeCounter > 0)
+        if (activeTimeCounter > 0)
         {
-            transform.position = Vector2.MoveTowards(transform.position,player.transform.position, speed* Time.deltaTime);  
+            transform.position = Vector2.MoveTowards(transform.position, player.transform.position, speed * Time.deltaTime);
         }
 
-        if(activeTimeCounter <0 && idleTimeCounter < 0 && aggressive)
+        if (activeTimeCounter < 0 && idleTimeCounter < 0 && aggressive)
         {
             anim.SetTrigger("disappear");
-            aggressive= false;
+            aggressive = false;
             idleTimeCounter = idleTime;
         }
-        if(activeTimeCounter <0 && idleTimeCounter < 0 && !aggressive)
+        if (activeTimeCounter < 0 && idleTimeCounter < 0 && !aggressive)
         {
             ChoosePosition();
             anim.SetTrigger("appear");
-            Debug.Log("Go!");
             aggressive = true;
             activeTimeCounter = activeTime;
         }
-        if(facingDirection==-1 && transform.position.x < player.transform.position.x)
+
+        FlipController();
+    }
+
+    private void FlipController()
+    {
+        if (player == null) return;
+        if (facingDirection == -1 && transform.position.x < player.transform.position.x)
         {
             Flip();
         }
-        else if(facingDirection==1 && transform.position.x > player.transform.position.x)
+        else if (facingDirection == 1 && transform.position.x > player.transform.position.x)
         {
             Flip();
         }

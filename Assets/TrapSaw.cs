@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TrapSaw : Trap
+public class TrapSaw : Danger
 {
 
     private Animator anim;
