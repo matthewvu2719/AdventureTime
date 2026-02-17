@@ -18,6 +18,34 @@ public class EnemyGhost : Enemy
             base.Damage();
     }
 
+    protected override void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (aggressive)
+        {
+            if (collision.GetComponent<Player>() != null)
+            {
+                Player player = collision.GetComponent<Player>();
+                player.KnockbackNoDamage(transform);
+                player.Freeze();
+
+            }
+        }
+
+    }
+
+    protected override void OnTriggerStay2D(Collider2D collider)
+    {
+        if (aggressive)
+        {
+            if (collider.GetComponent<Player>() != null)
+            {
+                Player player = collider.GetComponent<Player>();
+                player.KnockbackNoDamage(transform);
+                player.Freeze();
+            }
+        }
+    }
+
     protected override void Start()
     {
         base.Start();
@@ -92,15 +120,5 @@ public class EnemyGhost : Enemy
         sr.enabled = true;
     }
 
-    protected override void OnTriggerEnter2D(Collider2D collider)
-    {
-        if(aggressive)
-            base.OnTriggerEnter2D(collider);
-    }
 
-    protected override void OnTriggerStay2D(Collider2D collider)
-    {
-        if (aggressive)
-            base.OnTriggerStay2D(collider);
-    }
 }

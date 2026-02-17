@@ -20,6 +20,10 @@ public class EnemyBat : Enemy
         defaultSpeed = speed;
         destination = idlePoint[0].position;
         transform.position = destination;
+        for(int i = 0; i < idlePoint.Length; i++)
+        {
+            idlePoint[i].GetComponent<SpriteRenderer>().enabled = false;
+        }
     }
 
 

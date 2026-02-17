@@ -26,6 +26,9 @@ public class TrapFire : Danger
         isWorking = !isWorking;
     }
 
+
+
+
     public void FireSwitchAfter(float seconds)
     {
         CancelInvoke();
@@ -40,7 +43,7 @@ public class TrapFire : Danger
         }
         else
         {
-            Debug.Log("Not Working");
+            return;
         }
     }
 }

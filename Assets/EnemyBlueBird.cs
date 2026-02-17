@@ -68,7 +68,7 @@ public class EnemyBlueBird : Enemy
     protected override void OnDrawGizmos()
     {
         base.OnDrawGizmos();
-        Gizmos.DrawLine(transform.position, new Vector2(transform.position.x, transform.position.y + groundDistance));
-        Gizmos.DrawLine(transform.position, new Vector2(transform.position.x, transform.position.y - ceilingDistance));
+        Gizmos.DrawLine(transform.position, new Vector2(transform.position.x, transform.position.y - groundDistance));
+        Gizmos.DrawLine(transform.position, new Vector2(transform.position.x, transform.position.y + ceilingDistance));
     }
 }

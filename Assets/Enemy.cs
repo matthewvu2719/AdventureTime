@@ -27,6 +27,9 @@ public class Enemy : Danger
 
     public bool invincible;
 
+    [Header("FX")]
+    [SerializeField] private GameObject deathFX;
+
     [Header("Move Info")]
     [SerializeField] protected float speed;
     [SerializeField] protected float idleTime = 2;
@@ -40,7 +43,9 @@ public class Enemy : Danger
         anim = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
 
-        player = PlayerManager.instance.currentPlayer.transform;
+        if(PlayerManager.instance.currentPlayer!=null)
+            player = PlayerManager.instance.currentPlayer.transform;
+        else player = null;
 
         if (groundCheck == null)
         {
@@ -87,8 +92,21 @@ public class Enemy : Danger
         
     }
 
+
+
+
     public void DestroyMe()
     {
+        if (deathFX != null)
+        {
+            GameObject newDeathFx = Instantiate(deathFX,transform.position,transform.rotation);
+            Destroy(newDeathFx,.3f);
+        }
+
+        if(GetComponent<EnemyDropFruitController>() != null)
+        {
+            GetComponent<EnemyDropFruitController>().DropFruits();
+        }
         Destroy(gameObject);
     }
 

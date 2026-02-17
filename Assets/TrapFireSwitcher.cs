@@ -5,7 +5,7 @@ using UnityEngine;
 public class TrapFireSwitcher : MonoBehaviour
 {
     // Start is called before the first frame update
-    public TrapFire myTrap;
+    public TrapFire[] myTrap;
     private Animator anim;
 
     private void Start()
@@ -17,7 +17,11 @@ public class TrapFireSwitcher : MonoBehaviour
         if(collision.GetComponent<Player>()!= null)
         {
             anim.SetTrigger("pressed");
-            myTrap.FireSwitchAfter(7);
+            for (int i = 0;i < myTrap.Length; i++)
+            {
+                myTrap[i].FireSwitchAfter(7);
+            }
+
         }
     }
 }
